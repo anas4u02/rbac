@@ -16,12 +16,12 @@ const UserSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    enum: [roles.admin, roles.client, roles.moderator],
+    enum: [roles.admin, roles.developer, roles.inbox],
     default: roles.client
   }
-})
+});
 
-ADMIN_EMAIL="anas4u02@gmail.com"
+ADMIN_EMAIL="anas4u02@gmail.com";
 
 // Hash the plain text password before saving
 UserSchema.pre('save', async function (next) {
@@ -37,7 +37,6 @@ UserSchema.pre('save', async function (next) {
       if (this.email === ADMIN_EMAIL.toLowerCase()) {
         this.role = roles.admin
       }
-
     }
     next();
   } catch (error) {
@@ -55,3 +54,7 @@ UserSchema.methods.isValidPassword = async function (password) {
 
 const User = mongoose.model('user', UserSchema)
 module.exports = User
+
+
+
+// eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcHAiLCJzdWIiOiIxNjk5OTM3IiwiYXVkIjoiV0VCIiwiaWF0IjoxNzA3NTM1NTQzLCJleHAiOjE3MTAxMjc1NDN9.QD01-6Rl4oSeXBjC3vX8-w6wmGX_IrUmtft_oi8pBHY
