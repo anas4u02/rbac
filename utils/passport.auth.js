@@ -13,7 +13,7 @@ passport.use(
         const user = await User.findOne({ email })
         // user not exit
         if (!user) {
-          return done(null, false, { message: "Emailnot registered." })
+          return done(null, false, { message: "Email not registered." })
         }
         // user exit. Verify password
         const isMatch = await user.isValidPassword(password)
@@ -44,9 +44,6 @@ passport.deserializeUser(async (id, done) => {
     const user = await User.findById(id);
     done(null, user);
   } catch (err) {
-    console.log("ERROR at Line 36, passportauth.js");
-
-    console.error('Error deserializing user:', err);
     done(err, null); // Or potentially redirect to an error page
   }
 });

@@ -19,7 +19,6 @@ router.get("/user/:id", async (req, res, next) => {
             res.redirect('/admin/users')
             return
         }
-        console.log("ERROR at Line 22, admin.route.js");
         const person = await User.findById(id)
         res.render('profile', { person })
     } catch (e) {
