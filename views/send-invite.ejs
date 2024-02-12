@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invite</title>
+</head>
+
+<body>
+    <form action="/auth/send-invite" method="post">
+        <div>
+            <label for="email">Email/Username</label>
+            <input type="text" name="email" id="email" value="<%= locals.email ? email : '' %>" />
+        </div>
+        <div>
+            <label for="role">Select Role</label>
+            <select name="role" id="role">
+                <option value="ADMIN">Admin</option>
+                <option value="DEVELOPER">Developer</option>
+                <option value="INBOX">Inbox</option>
+            </select>
+        </div>
+        <div>
+            <input type="submit" value="Invite" />
+        </div>
+    </form>
+</body>
+
+</html>
