@@ -1,15 +1,72 @@
 const router = require('express').Router()
 const User = require('../models/user.model')
-const passport = require('passport')
+const passport = require('passport');
+
+const { MailtrapClient } = require("mailtrap");
+
+const TOKEN = "06fd42045a4805b24b3a6321420a8ea0";
+const ENDPOINT = "https://send.api.mailtrap.io/";
+
+const client = new MailtrapClient({ endpoint: ENDPOINT, token: TOKEN });
+
+let email;
+let role;
+
+const sender = {
+    email: "mailtrap@anas4u02.github.io",
+    name: "Mailtrap Test",
+};
+
+const recipients = [
+    {
+        email: "mohammadanas.work@gmail.com",
+    }
+];
 
 router.get('/login', async (req, res, next) => {
-    res.render('login')
-})
+    res.render('login');
+});
 
 router.get('/register', async (req, res, next) => {
-    console.log("Rendering register page");
-    res.render('register')
-})
+    res.render('register');
+});
+
+router.get('/send-invite', async (req, res, next) => {
+    res.render('send-invite');
+});
+
+router.post('/send-invite', async (req, res, next) => {
+    try {
+        email = req.body.email;
+        role = req.body.role;
+        res.redirect('/auth/accept-invite');
+    } 
+    catch (e) {
+        res.redirect('/send-invite');
+    }
+    // try {
+        // email = req.body.email;
+        // role = req.body.role;
+
+        // client
+        //     .send({
+        //         from: sender,
+        //         to: recipients,
+        //         subject: "You are awesome!",
+        //         text: "Congrats for sending test email with Mailtrap!",
+        //         category: "Integration Test",
+        //     })
+        //     .then(console.log, console.error);
+
+        // Insert mail trap code here to send an email
+    // } catch (e) {
+    //     next(e);
+    // }
+});
+
+router.get('/accept-invite', async (req, res, next) => {
+    res.render('accept-invite', { email, role });
+});
 
 router.post('/login', passport.authenticate('local', {
     successRedirect: '/user/profile',
@@ -22,16 +79,12 @@ router.post('/register', async (req, res, next) => {
     try {
         // console.log(req.body)
         const email = req.body.email
-        console.log("EMAIL OF THE USER: ", email);
         const doesExit = await User.findOne({ email })
-        console.log("doesExist:", doesExit);
         if (doesExit) {
-            console.log("It does exist!");
             res.redirect('/auth/register')
             return
         }
         const user = new User(req.body);
-        console.log("User Object: ", user);
         await user.save()
         res.redirect('/auth/login')
     } catch (e) {
