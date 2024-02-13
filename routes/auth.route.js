@@ -43,7 +43,7 @@ router.post('/send-invite', async (req, res, next) => {
         role = req.body.role;
         const doesExit = await User.findOne({ email })
         if (doesExit) {
-            res.redirect('/auth/register')
+            res.redirect('/auth/login')
             return
         }
         const invitation = new Invitation(req.body);
