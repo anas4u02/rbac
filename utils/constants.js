@@ -3,5 +3,10 @@ module.exports = {
         admin: 'ADMIN',
         developer: 'DEVELOPER',
         inbox: 'INBOX'
+    },
+    invitationStatus: {
+        accepted: 'ACCEPTED',
+        rejected: 'REJECTED',
+        pending: 'PENDING'
     }
 }
