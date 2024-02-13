@@ -6,6 +6,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Manage Users</title>
 </head>
+
+<h3>Users</h3>
+
 <body>
   <table>
     <thead>
@@ -38,6 +41,27 @@
     </tbody>
   </table>
   <br>
+
+  <h3>Invitations</h3>
+    <table>
+      <thead>
+        <th style="padding-right: 4px;">id</th>
+        <th style="padding-right: 4px;">email</th>
+        <th style="padding-right: 8px;">role</th>
+        <th style="padding-right: 4px;">invitation status</th>
+      </thead>
+      <tbody>
+        <% invitations.forEach(invitation=> { %>
+          <tr>
+            <td style="padding-right: 4px;"><%= invitation.id %></td>
+            <td style="padding-right: 4px;"><%= invitation.email %></td>
+            <td style="padding-right: 8px;"><%= invitation.role %></td>
+            <td style="padding-right: 4px;"><%= invitation.invitationStatus %></td>
+          </tr>
+          <% }) %>
+      </tbody>
+    </table>
+    <br>
   <a href="/user/profile">PROFILE</a>
 </body>
 </html>

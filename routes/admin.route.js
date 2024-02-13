@@ -2,11 +2,13 @@ const router = require('express').Router()
 const User = require('../models/user.model')
 const mongoose = require('mongoose')
 const { roles } = require('../utils/constants')
+const Invitation = require('../models/invitation.model')
 
 router.get("/users", async (req, res, next) => {
     try {
         const users = await User.find()
-        res.render('manage-users', { users })
+        const invitations = await Invitation.find()
+        res.render('manage-users', { users, invitations })
     } catch (e) {
         next(e)
     }
