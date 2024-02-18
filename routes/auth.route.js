@@ -3,27 +3,10 @@ const User = require('../models/user.model')
 const passport = require('passport');
 const { invitationStatus } = require('../utils/constants');
 
-const { MailtrapClient } = require("mailtrap");
 const Invitation = require('../models/invitation.model');
-
-const TOKEN = "06fd42045a4805b24b3a6321420a8ea0";
-const ENDPOINT = "https://send.api.mailtrap.io/";
-
-const client = new MailtrapClient({ endpoint: ENDPOINT, token: TOKEN });
 
 let email;
 let role;
-
-const sender = {
-    email: "mailtrap@anas4u02.github.io",
-    name: "Mailtrap Test",
-};
-
-const recipients = [
-    {
-        email: "mohammadanas.work@gmail.com",
-    }
-];
 
 router.get('/login', async (req, res, next) => {
     res.render('login');
@@ -53,24 +36,6 @@ router.post('/send-invite', async (req, res, next) => {
     catch (e) {
         res.redirect('/send-invite');
     }
-    // try {
-    // email = req.body.email;
-    // role = req.body.role;
-
-    // client
-    //     .send({
-    //         from: sender,
-    //         to: recipients,
-    //         subject: "You are awesome!",
-    //         text: "Congrats for sending test email with Mailtrap!",
-    //         category: "Integration Test",
-    //     })
-    //     .then(console.log, console.error);
-
-    // Insert mail trap code here to send an email
-    // } catch (e) {
-    //     next(e);
-    // }
 });
 
 router.get('/accept-invite', async (req, res, next) => {
@@ -84,9 +49,7 @@ router.post('/login', passport.authenticate('local', {
 }));
 
 router.post('/register', async (req, res, next) => {
-    console.log("Inside POST request");
     try {
-        // console.log(req.body)
         const email = req.body.email
         const doesExit = await User.findOne({ email });
         const isInvited = await Invitation.findOne({ email });

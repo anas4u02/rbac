@@ -29,7 +29,6 @@ router.get("/user/:id", async (req, res, next) => {
 })
 
 router.post("/update-role", async (req, res, next) => {
-    console.log("INSIDE UPDTAE ROLE");
     try {
         const { id, role } = req.body;
 
@@ -55,7 +54,6 @@ router.post("/update-role", async (req, res, next) => {
         }
 
         // update the user
-        console.log("ERROR at Line 56, admin.route.js");
         const user = await User.findByIdAndUpdate(
             id,
             { role },

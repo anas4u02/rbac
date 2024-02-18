@@ -65,24 +65,22 @@ app.use((error, req, res, next) => {
 })
 
 const PORT = process.env.PORT || 8080
-console.log("IN here");
-
 
 
 // database connection
-  // mongoose
-  // .connect(process.env.DB_URL, {
-  //   useNewUrlParser: true,
-  //   useUnifiedTopology: true,
-  // })
-  // .then((result) => {
-  //   console.log('mongoose connected')
-  //   app.listen(PORT, () => {
-  //     console.log(`Listening at port ${PORT}`);
-  //   })
-  // }
-  // )
-  // .catch((err) => console.log(err));
+  mongoose
+  .connect(process.env.DB_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then((result) => {
+    console.log('mongoose connected')
+    app.listen(PORT, () => {
+      console.log(`Listening at port ${PORT}`);
+    })
+  }
+  )
+  .catch((err) => console.log(err));
 
 
 // middleware to ensure if user is logged in
