@@ -17,11 +17,10 @@ const UserSchema = new mongoose.Schema({
   role: {
     type: String,
     enum: [roles.admin, roles.developer, roles.inbox],
-    default: roles.client
+    default: roles.inbox
   }
 });
 
-ADMIN_EMAIL="anas4u02@gmail.com";
 
 // Hash the plain text password before saving
 UserSchema.pre('save', async function (next) {
